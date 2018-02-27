@@ -10,28 +10,43 @@ contract TestCase {
     function testUserCanCreateCase() public {
         string memory title = "Test Case";
         string memory description = "Test Description";
+        bytes32[10] memory imageArray = [
+            stringToBytes32("QmRTsgbe4GBc2cb3gJCMkcRjUY8Bgr9e"),
+            stringToBytes32("Koiyj2F5YRrdpf"),
+            stringToBytes32("QmRTsgbe4GBc2cb3gJCMkcRjUY8Bgr9e"),
+            stringToBytes32("Koiyj2F5YRrdpf"),
+            stringToBytes32("QmRTsgbe4GBc2cb3gJCMkcRjUY8Bgr9e"),
+            stringToBytes32("Koiyj2F5YRrdpf"),
+            stringToBytes32("QmRTsgbe4GBc2cb3gJCMkcRjUY8Bgr9e"),
+            stringToBytes32("Koiyj2F5YRrdpf"),
+            stringToBytes32("QmRTsgbe4GBc2cb3gJCMkcRjUY8Bgr9e"),
+            stringToBytes32("Koiyj2F5YRrdpf")
+        ];
         address returnedAddress;
         bytes32 returnedTitle;
         bytes32 returnedDescription;
-        (returnedAddress, returnedTitle, returnedDescription) = c.createCase(title, description);
+        bytes32[10] memory returnedImages;
+        (returnedAddress, returnedTitle, returnedDescription, returnedImages) = c.createCase(title, description, imageArray);
         Assert.equal(returnedAddress, this, "Creator's address should be recorded");
         Assert.equal(bytes32ToString(returnedTitle), title, "Title should be recorded");
         Assert.equal(bytes32ToString(returnedDescription), description, "Description should be recorded");
+        Assert.equal(bytes32ToString(returnedImages[0]), "QmRTsgbe4GBc2cb3gJCMkcRjUY8Bgr9e", "Image should be recorded");
+        Assert.equal(bytes32ToString(returnedImages[1]), "Koiyj2F5YRrdpf", "Image should be recorded");
         Assert.equal(c.numberOfCases(), 1, "Number of cases should be incremented by 1");
     }
 
     function testUserCanUpdateCase() public {
         bytes32[10] memory imageArray = [
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
-            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg")
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD"),
+            stringToBytes32("https://goo.gl/rRY5FD")
         ];
         Assert.equal(c.updateCase(imageArray), true, "Successfully updating a case should return true");
     }
