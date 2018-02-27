@@ -23,6 +23,13 @@ contract Case {
         return (cases[msg.sender].author, cases[msg.sender].title, cases[msg.sender].description);
     }
 
+    function updateCase(bytes32[10] dataImages) public returns (bool) {
+        for (uint i = 0; i < 10; i++) {
+            cases[msg.sender].images[i] = dataImages[i];
+        }
+        return true;
+    }
+
     function numberOfCases() public view returns (uint) {
         return caseArray.length;
     }

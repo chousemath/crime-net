@@ -20,6 +20,30 @@ contract TestCase {
         Assert.equal(c.numberOfCases(), 1, "Number of cases should be incremented by 1");
     }
 
+    function testUserCanUpdateCase() public {
+        bytes32[10] memory imageArray = [
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg"),
+            stringToBytes32("https://pbs.twimg.com/profile_images/926010203723534337/31F_Bkyq_400x400.jpg")
+        ];
+        Assert.equal(c.updateCase(imageArray), true, "Successfully updating a case should return true");
+    }
+
+    function stringToBytes32(string memory source) private pure returns (bytes32 result) {
+        bytes memory tempEmptyStringTest = bytes(source);
+        if (tempEmptyStringTest.length == 0) {return 0x0;}
+        assembly {
+            result := mload(add(source, 32))
+        }
+    }
+
     function bytes32ToString(bytes32 x) public pure returns (string) {
         bytes memory bytesString = new bytes(32);
         uint charCount = 0;
